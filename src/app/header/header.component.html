@@ -1,0 +1,33 @@
+<!-- Toolbar -->
+<mat-toolbar color="primary">
+  <span>
+    <mat-icon aria-hidden="true" aria-label="Coronavirus help">copyright</mat-icon>
+    <span>COVIDAssist - Coronavirus Help</span>
+  </span>
+  <span class="menu-container">
+  </span>
+  <span>
+    <button mat-button [matMenuTriggerFor]="menu">Info</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <span>FAQ</span>
+      </button>
+      <button mat-menu-item>
+        <span>Mental health</span>
+      </button>
+      <button mat-menu-item>
+        <span>Support services</span>
+      </button>
+    </mat-menu>
+    <button mat-button [matMenuTriggerFor]="menuAbout">About</button>
+    <mat-menu #menuAbout="matMenu">
+      <button mat-menu-item>
+        <span>About us</span>
+      </button>
+      <button mat-menu-item>
+        <span>Contact us</span>
+      </button>
+    </mat-menu>
+  </span>
+</mat-toolbar>
+
