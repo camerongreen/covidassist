@@ -9,6 +9,7 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {MaterialModule} from './material/material.module';
 import {HeaderComponent} from './header/header.component';
+import {HttpClientModule} from '@angular/common/http';
 import {FormComponent} from './form/form.component';
 import {ResultsComponent} from './results/results.component';
 
@@ -24,6 +25,7 @@ import {ResultsComponent} from './results/results.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    HttpClientModule,
     MaterialModule,
     ReactiveFormsModule
   ],

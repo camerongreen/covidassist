@@ -1,4 +1,4 @@
-import {Component,  OnInit, Output} from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {SearchDetailsService} from '../search-details.service';
 
@@ -11,15 +11,16 @@ export class FormComponent implements OnInit {
   searchForm: FormGroup;
 
   states = [
-    'Queensland',
-    'South Australia',
-    'West Australia'
+    {name: 'qld', friendly_name: 'Queensland'},
+    {name: 'sa', friendly_name: 'South Australia'},
+    {name: 'wa:', friendly_name: 'West Australia'},
+    {name: 'aus', friendly_name: 'Federal'}
   ];
 
   userStatuses = [
-    'unemployed',
-    'business',
-    'retired',
+    'Unemployed',
+    'Business',
+    'Retired',
   ];
 
   constructor(
@@ -39,7 +40,6 @@ export class FormComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.searchForm.value);
     this.searchDetailsService.searchRequest(this.searchForm.value);
   }
 }

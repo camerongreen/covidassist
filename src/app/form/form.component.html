@@ -1,16 +1,17 @@
 <h2>Search for assistance:</h2>
 <form [formGroup]="searchForm" (submit)="submit()">
-  <mat-form-field>
+  <mat-form-field class="element">
     <mat-label>State</mat-label>
     <mat-select formControlName="state">
-      <mat-option *ngFor="let state of states" value="{{state}}">{{state}}</mat-option>
+      <mat-option *ngFor="let state of states" value="{{state.name}}">{{state.friendly_name}}</mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field class="element">
     <mat-label>Your status</mat-label>
     <mat-select formControlName="userStatus">
-      <mat-option *ngFor="let userStatus of userStatuses" value="{{userStatus}}">{{userStatus}}</mat-option>
+      <mat-option *ngFor="let userStatus of userStatuses" value="{{userStatus | lowercase }}">{{userStatus}}</mat-option>
     </mat-select>
   </mat-form-field>
- <button mat-raised-button type="submit">Search</button>
+ <button mat-raised-button type="submit" color="primary">Search</button>
 </form>
+<mat-divider></mat-divider>

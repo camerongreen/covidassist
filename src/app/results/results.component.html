@@ -1,3 +1,13 @@
-<p>results works!</p>
-<div>State: {{query.state}}</div>
-<div>Status: {{query.userStatus}}</div>
+<div *ngIf="resources">
+  <h2>Results</h2>
+  <div *ngFor="let resource of resources">
+    <mat-card>
+      <mat-card-title>{{resource.title}}</mat-card-title>
+      <mat-card-content>
+        {{resource.description}}
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+
