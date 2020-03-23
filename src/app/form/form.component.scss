@@ -1,3 +1,9 @@
-.element {
-  padding: 1rem;
+:host {
+  > * {
+    margin: 1rem;
+  }
+
+  .element {
+    padding: 1rem;
+  }
 }
