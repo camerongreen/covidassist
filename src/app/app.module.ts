@@ -12,13 +12,15 @@ import {HeaderComponent} from './header/header.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormComponent} from './form/form.component';
 import {ResultsComponent} from './results/results.component';
+import { ResourceComponent } from './resource/resource.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FormComponent,
-    ResultsComponent
+    ResultsComponent,
+    ResourceComponent
   ],
   imports: [
     BrowserModule,

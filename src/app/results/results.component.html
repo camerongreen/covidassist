@@ -1,12 +1,7 @@
 <div *ngIf="resources">
   <h2>Results</h2>
   <div *ngFor="let resource of resources">
-    <mat-card>
-      <mat-card-title>{{resource.title}}</mat-card-title>
-      <mat-card-content>
-        {{resource.description}}
-      </mat-card-content>
-    </mat-card>
+       <app-resource [resource]="resource"></app-resource>
   </div>
 </div>
 
