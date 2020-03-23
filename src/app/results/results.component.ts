@@ -25,7 +25,7 @@ export class ResultsComponent implements OnDestroy {
   }
 
   updateQuery(query): void {
-    this.resources = this.dataSourceService.search(query.state, query.userStatus);
+    this.resources = this.dataSourceService.search(query.state, query.category);
   }
 
   ngOnDestroy() {

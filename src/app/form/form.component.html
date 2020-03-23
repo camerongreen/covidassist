@@ -7,9 +7,9 @@
     </mat-select>
   </mat-form-field>
   <mat-form-field class="element">
-    <mat-label>Your status</mat-label>
-    <mat-select formControlName="userStatus">
-      <mat-option *ngFor="let userStatus of userStatuses" value="{{userStatus | lowercase }}">{{userStatus}}</mat-option>
+    <mat-label>Category</mat-label>
+    <mat-select formControlName="category">
+      <mat-option *ngFor="let category of categories" value="{{category | lowercase }}">{{category}}</mat-option>
     </mat-select>
   </mat-form-field>
  <button mat-raised-button type="submit" color="primary">Search</button>

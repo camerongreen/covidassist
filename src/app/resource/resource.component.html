@@ -1,6 +1,14 @@
-<mat-card>
-  <mat-card-title>{{resource.title}}</mat-card-title>
-  <mat-card-content>
-    {{resource.description}}
-  </mat-card-content>
-</mat-card>
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>{{resource.title}}</mat-panel-title>
+    <mat-panel-description>
+      Type: {{resource.type}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-list>
+    <mat-list-item>Description: {{resource.description}}</mat-list-item>
+    <mat-list-item>URL: <a href="{{resource.url}}" target="blank">{{resource.url}}</a></mat-list-item>
+    <mat-list-item>Region: {{resource.region}}</mat-list-item>
+    <mat-list-item>Categories: {{resource.categories.join(', ')}}</mat-list-item>
+  </mat-list>
+</mat-expansion-panel>

@@ -8,47 +8,52 @@ import {Resource} from './resource.model';
   providedIn: 'root'
 })
 export class DataSourceService {
-  resources: Resource[];
+  resources: Resource[] = [];
 
   constructor(
     private http: HttpClient
   ) {
-    this.loadResources();
   }
 
-  search(state: string, userStatus: string): Resource[] {
-    const returnVal = [];
+  search(state: string, category: string): Resource[] {
+    const returnVal: Resource[] = [];
     for (const resource of this.resources) {
-      if (this.matchingRow(state, userStatus, resource)) {
+      if (this.matchingRow(state, category, resource)) {
         returnVal.push(resource);
       }
     }
     return returnVal;
   }
 
-  matchingRow(state: string, userStatus: string, resource: Resource): boolean {
-    if ((resource.region.toLocaleLowerCase() === state) || (resource.region.toLocaleLowerCase() === 'federal')) {
-      return true;
-    } else if (resource.categories.indexOf(userStatus) !== -1) {
+  getCategories(): string[] {
+    const uniqueCategories: string[] = [];
+    for (const resource of this.resources) {
+      for (const category of resource.categories) {
+        uniqueCategories[category] = true;
+      }
+    }
+
+    return Object.keys(uniqueCategories).sort();
+  }
+
+  matchingRow(state: string, category: string, resource: Resource): boolean {
+    if (
+      ((resource.region.toLocaleLowerCase() === state) || (resource.region.toLocaleLowerCase() === 'federal'))
+      && (resource.categories.indexOf(category) !== -1)
+    ) {
       return true;
     }
     return false;
-  }
-
-  loadResources(): void {
-    this.getResources().subscribe(resourcesJson => this.resources = this.parseResources(resourcesJson));
   }
 
   getResources(): Observable<object> {
     return this.http.get<object>(environment.resourcesUrl);
   }
 
-  parseResources(resourcesJson: object): Resource[] {
-    const returnVal: Resource[] = [];
+  parseResources(resourcesJson: object): void {
     for (const entry of resourcesJson.feed.entry) {
-      returnVal.push(this.parseResource(entry));
+      this.resources.push(this.parseResource(entry));
     }
-    return returnVal;
   }
 
   parseResource(entry: object): Resource {
