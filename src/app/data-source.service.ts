@@ -36,9 +36,34 @@ export class DataSourceService {
     return Object.keys(uniqueCategories).sort();
   }
 
+  getCategoriesByState(region: string): string[] {
+    const uniqueCategories = {};
+    for (const resource of this.resources) {
+      for (const category of resource.categories) {
+        const regionLower = resource.region.toLocaleLowerCase();
+        if (!(regionLower in uniqueCategories)) {
+          uniqueCategories[regionLower] = [];
+        }
+        uniqueCategories[regionLower][category] = true;
+      }
+    }
+
+    const returnVal = {};
+
+    if ('aus' in uniqueCategories) {
+      Object.assign(returnVal, uniqueCategories.aus);
+    }
+
+    if (region in uniqueCategories) {
+      Object.assign(returnVal, uniqueCategories[region]);
+    }
+
+    return Object.keys(returnVal).sort();
+  }
+
   matchingRow(state: string, category: string, resource: Resource): boolean {
     if (
-      ((resource.region.toLocaleLowerCase() === state) || (resource.region.toLocaleLowerCase() === 'federal'))
+      ((resource.region.toLocaleLowerCase() === state) || (resource.region.toLocaleLowerCase() === 'aus'))
       && (resource.categories.indexOf(category) !== -1)
     ) {
       return true;

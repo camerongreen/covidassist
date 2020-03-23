@@ -12,11 +12,14 @@ export class FormComponent implements OnInit {
   searchForm: FormGroup;
 
   states = [
+    {name: 'act', friendly_name: 'Australian Capital Territory'},
+    {name: 'nsw', friendly_name: 'New South Wales'},
+    {name: 'nt', friendly_name: 'Northern Territory'},
     {name: 'qld', friendly_name: 'Queensland'},
     {name: 'sa', friendly_name: 'South Australia'},
     {name: 'tas', friendly_name: 'Tasmania'},
-    {name: 'wa:', friendly_name: 'West Australia'},
-    {name: 'aus', friendly_name: 'Federal'}
+    {name: 'vic', friendly_name: 'Victoria'},
+    {name: 'wa:', friendly_name: 'West Australia'}
   ];
 
   categories: string[] = [];
@@ -41,5 +44,9 @@ export class FormComponent implements OnInit {
 
   submit() {
     this.searchDetailsService.searchRequest(this.searchForm.value);
+  }
+
+  updateCategories(value) {
+    this.categories = this.dataSourceService.getCategoriesByState(value);
   }
 }

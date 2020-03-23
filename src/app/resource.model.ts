@@ -5,4 +5,6 @@ export interface Resource {
   title: string;
   description: string;
   url: string;
+  startDate: object;
+  endDate: object;
 }

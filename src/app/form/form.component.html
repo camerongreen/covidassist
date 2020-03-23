@@ -2,7 +2,7 @@
 <form [formGroup]="searchForm" (submit)="submit()">
   <mat-form-field class="element">
     <mat-label>State</mat-label>
-    <mat-select formControlName="state">
+    <mat-select formControlName="state" (selectionChange)="updateCategories($event.value)">
       <mat-option *ngFor="let state of states" value="{{state.name}}">{{state.friendly_name}}</mat-option>
     </mat-select>
   </mat-form-field>
