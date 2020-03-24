@@ -3,3 +3,28 @@
     margin: 1rem;
   }
 }
+
+table {
+  width: 100%;
+}
+
+tr.resource-detail-row {
+  height: 0;
+}
+
+tr.resource-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.resource-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.resource-row td {
+  border-bottom-width: 0;
+}
+
+.resource-detail {
+  overflow: hidden;
+  display: flex;
+}

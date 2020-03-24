@@ -22,48 +22,54 @@ export class DataSourceService {
         returnVal.push(resource);
       }
     }
-    return returnVal;
+    return returnVal.sort((a: Resource, b: Resource) => a.title.localeCompare(b.title));
   }
 
   getCategories(): string[] {
-    const uniqueCategories: string[] = [];
+    const uniqueCategories = new Map();
     for (const resource of this.resources) {
       for (const category of resource.categories) {
-        uniqueCategories[category] = true;
+        uniqueCategories.set(category, true);
       }
     }
 
-    return Object.keys(uniqueCategories).sort();
+    return Array.from(uniqueCategories.keys()).sort();
   }
 
   getCategoriesByState(region: string): string[] {
-    const uniqueCategories = {};
+    const uniqueCategories = new Map();
     for (const resource of this.resources) {
       for (const category of resource.categories) {
         const regionLower = resource.region.toLocaleLowerCase();
         if (!(regionLower in uniqueCategories)) {
-          uniqueCategories[regionLower] = [];
+          uniqueCategories.set(regionLower, new Map());
         }
-        uniqueCategories[regionLower][category] = true;
+        (uniqueCategories.get(regionLower)).set(category, true);
       }
     }
 
-    const returnVal = {};
+    const returnVal = new Set<string>();
 
-    if ('aus' in uniqueCategories) {
-      Object.assign(returnVal, uniqueCategories.aus);
+    if (uniqueCategories.has('aus')) {
+      const ausKeys: string[] = Array.from(uniqueCategories.get('aus').keys());
+      ausKeys.forEach(item => returnVal.add(item));
     }
 
-    if (region in uniqueCategories) {
-      Object.assign(returnVal, uniqueCategories[region]);
+    if (uniqueCategories.has(region)) {
+      const regionKeys: string[] = Array.from(uniqueCategories.get(region).keys());
+      regionKeys.forEach(item => returnVal.add(item));
     }
 
-    return Object.keys(returnVal).sort();
+    return [...returnVal].sort();
   }
 
   matchingRow(state: string, category: string, resource: Resource): boolean {
+    const endDate = this.convertDate(resource.endDate);
+    if (endDate < new Date()) {
+      return false;
+    }
     if (
-      ((resource.region.toLocaleLowerCase() === state) || (resource.region.toLocaleLowerCase() === 'aus'))
+      ([state, 'aus'].indexOf(resource.region.toLocaleLowerCase()) !== -1)
       && (resource.categories.indexOf(category) !== -1)
     ) {
       return true;
@@ -75,19 +81,21 @@ export class DataSourceService {
     return this.http.get<object>(environment.resourcesUrl);
   }
 
-  parseResources(resourcesJson: object): void {
+  parseResources(resourcesJson: any): void {
     for (const entry of resourcesJson.feed.entry) {
       this.resources.push(this.parseResource(entry));
     }
   }
 
-  parseResource(entry: object): Resource {
+  parseResource(entry: any): Resource {
     const resource: Resource = {
       categories: this.parseCategories(entry.gsx$categories.$t),
       region: entry.gsx$region.$t,
       type: entry.gsx$type.$t,
       title: entry.gsx$title.$t,
       description: entry.gsx$description.$t,
+      startDate: entry.gsx$startdate.$t,
+      endDate: entry.gsx$enddate.$t,
       url: entry.gsx$url.$t
     };
 
@@ -96,5 +104,12 @@ export class DataSourceService {
 
   parseCategories(categories: string): string[] {
     return categories.split(/\s*(?:\n|,|\.|\sand\s)\s*/).filter(val => val.length).map(val => val.toLowerCase());
+  }
+
+  convertDate(dateString: string) {
+    const dateParts: string[] = dateString.split('/');
+
+    // Month is 0-based, that's why we need dataParts[1] - 1.
+    return new Date(parseInt(dateParts[2], 10), parseInt(dateParts[1], 10) - 1, parseInt(dateParts[0], 10));
   }
 }
