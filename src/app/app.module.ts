@@ -15,6 +15,10 @@ import {ResultsComponent} from './results/results.component';
 import {ResourceComponent} from './resource/resource.component';
 import {initAppFactory} from './InitAppFactory';
 import {DataSourceService} from './data-source.service';
+import { FAQComponent } from './faq/faq.component';
+import { SearchComponent } from './search/search.component';
+import { ContactComponent } from './contact/contact.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import {DataSourceService} from './data-source.service';
     HeaderComponent,
     FormComponent,
     ResultsComponent,
-    ResourceComponent
+    ResourceComponent,
+    FAQComponent,
+    SearchComponent,
+    ContactComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
