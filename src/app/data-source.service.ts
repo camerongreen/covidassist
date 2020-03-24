@@ -70,7 +70,7 @@ export class DataSourceService {
     }
     if (
       ([state, 'aus'].indexOf(resource.region.toLocaleLowerCase()) !== -1)
-      && (resource.categories.indexOf(category) !== -1)
+      && ((resource.categories.indexOf(category) !== -1) || (resource.categories.length === 0))
     ) {
       return true;
     }
@@ -90,13 +90,13 @@ export class DataSourceService {
   parseResource(entry: any): Resource {
     const resource: Resource = {
       categories: this.parseCategories(entry.gsx$categories.$t),
-      region: entry.gsx$region.$t,
-      type: entry.gsx$type.$t,
-      title: entry.gsx$title.$t,
-      description: entry.gsx$description.$t,
-      startDate: entry.gsx$startdate.$t,
-      endDate: entry.gsx$enddate.$t,
-      url: entry.gsx$url.$t
+      region: entry.gsx$region.$t.trim(),
+      type: entry.gsx$type.$t.trim(),
+      title: entry.gsx$title.$t.trim(),
+      description: entry.gsx$description.$t.trim(),
+      startDate: entry.gsx$startdate.$t.trim(),
+      endDate: entry.gsx$enddate.$t.trim(),
+      url: entry.gsx$url.$t.trim()
     };
 
     return resource;
