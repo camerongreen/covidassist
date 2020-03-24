@@ -1,30 +1,29 @@
 :host {
-  > * {
-    margin: 1rem;
+  display: block;
+  margin: 1rem;
+
+  table {
+    width: 100%;
   }
-}
 
-table {
-  width: 100%;
-}
+  tr.resource-detail-row {
+    height: 0;
+  }
 
-tr.resource-detail-row {
-  height: 0;
-}
+  tr.resource-row:not(.example-expanded-row):hover {
+    background: whitesmoke;
+  }
 
-tr.resource-row:not(.example-expanded-row):hover {
-  background: whitesmoke;
-}
+  tr.resource-row:not(.example-expanded-row):active {
+    background: #efefef;
+  }
 
-tr.resource-row:not(.example-expanded-row):active {
-  background: #efefef;
-}
+  .resource-row td {
+    border-bottom-width: 0;
+  }
 
-.resource-row td {
-  border-bottom-width: 0;
-}
-
-.resource-detail {
-  overflow: hidden;
-  display: flex;
+  .resource-detail {
+    overflow: hidden;
+    display: flex;
+  }
 }
