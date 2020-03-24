@@ -9,7 +9,7 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {MaterialModule} from './material/material.module';
 import {HeaderComponent} from './header/header.component';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import {FormComponent} from './form/form.component';
 import {ResultsComponent} from './results/results.component';
 import {ResourceComponent} from './resource/resource.component';
