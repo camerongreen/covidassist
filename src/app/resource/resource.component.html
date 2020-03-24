@@ -2,8 +2,8 @@
   <mat-list-item *ngIf="resource.description">Description: {{resource.description}}</mat-list-item>
   <mat-list-item *ngIf="resource.url">URL: <a href="{{resource.url}}" target="blank">{{resource.url}}</a>
   </mat-list-item>
-  <mat-list-item *ngIf="resource.region">Region: {{resource.region}}</mat-list-item>
-  <mat-list-item *ngIf="resource.categories">Categories: {{resource.categories.join(', ')}}</mat-list-item>
-  <mat-list-item *ngIf="resource.endDate">Start Date: {{resource.startDate}}</mat-list-item>
-  <mat-list-item *ngIf="resource.endDate">End Date: {{resource.endDate}}</mat-list-item>
+  <mat-list-item *ngIf="resource.region.length > 0">Region: {{resource.region}}</mat-list-item>
+  <mat-list-item *ngIf="resource.categories.length > 0">Categories: {{resource.categories.join(', ')}}</mat-list-item>
+  <mat-list-item *ngIf="resource.startDate.length > 0">Start Date: {{resource.startDate}}</mat-list-item>
+  <mat-list-item *ngIf="resource.endDate.length > 0">End Date: {{resource.endDate}}</mat-list-item>
 </mat-list>
