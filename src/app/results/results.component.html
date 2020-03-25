@@ -5,7 +5,7 @@
 
   <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column | titlecase}} </th>
-    <td mat-cell *matCellDef="let resource"><span *ngIf="column==='more'">View more</span> {{resource[column]}} </td>
+    <td mat-cell *matCellDef="let resource"><span *ngIf="column==='more'">View</span> {{resource[column]}} </td>
   </ng-container>
 
   <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
