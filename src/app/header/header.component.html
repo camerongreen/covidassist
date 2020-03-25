@@ -5,9 +5,15 @@
   </span>
   <span class="menu-container">
   </span>
-  <span>
-    <button mat-button [routerLink]="['']">Home</button>
-    <button mat-button [matMenuTriggerFor]="menu">Info</button>
+  <span  fxShow="true" fxHide.lt-md="true">
+    <button mat-button [routerLink]="['']">
+      <mat-icon aria-hidden="false" aria-label="Home icon">home</mat-icon>
+      Home
+    </button>
+    <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon aria-hidden="false" aria-label="Info icon">info</mat-icon>
+      Info
+    </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item [routerLink]="['faq']">
         <span>FAQ</span>
@@ -29,5 +35,39 @@
       </button>
     </mat-menu>
   </span>
+  <div fxShow="true" fxHide.gt-sm="true">
+    <button mat-button (click)="sidenav.toggle()">
+      <mat-icon aria-hidden="false" aria-label="Show menu">menu</mat-icon>
+      Menu
+    </button>
+  </div>
 </mat-toolbar>
 
+<mat-sidenav-container fxFlexFill class="container">
+  <mat-sidenav #sidenav fxLayout="column" (click)="sidenav.toggle()">
+    <div fxLayout="column">
+      <button mat-menu-item [routerLink]="['']">
+        <mat-icon aria-hidden="false" aria-label="Home icon">home</mat-icon>
+        <span>Home</span>
+      </button>
+      <button mat-menu-item [routerLink]="['faq']">
+        <span>FAQ</span>
+      </button>
+      <button mat-menu-item>
+        <span>Mental health</span>
+      </button>
+      <button mat-menu-item>
+        <span>Support services</span>
+      </button>
+      <button mat-menu-item [routerLink]="['about']">
+        <span>About us</span>
+      </button>
+      <button mat-menu-item [routerLink]="['contact']">
+        <span>Contact us</span>
+      </button>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content fxFlexFill>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
